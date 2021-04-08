@@ -6,11 +6,13 @@ import { Store } from '../../components/Store';
 import { useStyles } from '../../utils/styles';
 import {
   Box,
+  Button,
   Card,
+  Grid,
   List,
   ListItem,
+  MenuItem,
   Select,
-  Grid,
   Slide,
   Typography,
 } from '@material-ui/core';
@@ -21,32 +23,33 @@ export default function Product(props) {
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
 
+  console.log(product);
+
   const classes = useStyles();
 
   const { state, dispatch } = useContext(Store);
-  const { userInfo, cart } = state;
+  const { cart } = state;
 
   const addToCartHandler = async () => {
-    console.log('Add To Card');
     const commerce = getCommerce(props.commercePublicKey);
-    // const lineItem = cart.data.line_items.find(
-    //   (x) => x.product_id === product.id
-    // );
-    // if (lineItem) {
-    //   const cartData = await commerce.cart.update(lineItem.id, {
-    //     quantity: quantity,
-    //   });
-    //   dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
-    //   Router.push('/cart');
-    // } else {
-    //   const cartData = await commerce.cart.add(product.id, quantity);
-    //   dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
-    //   Router.push('/cart');
-    // }
+    const lineItem = cart.data.line_items.find(
+      (x) => x.product_id === product.id
+    );
+    if (lineItem) {
+      const cartData = await commerce.cart.update(lineItem.id, {
+        quantity: quantity,
+      });
+      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
+      Router.push('/cart');
+    } else {
+      const cartData = await commerce.cart.add(product.id, quantity);
+      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
+      Router.push('/cart');
+    }
   };
 
   return (
-    <Layout title='Products' commercePublicKey={props.commercePublicKey}>
+    <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
       <Slide direction='up' in={true}>
         <Grid container spacing={1}>
           <Grid item md={6}>
@@ -83,31 +86,30 @@ export default function Product(props) {
                     <Grid item xs={6}>
                       Price
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       {product.price.formatted_with_symbol}
                     </Grid>
                   </Grid>
                 </ListItem>
-
                 <ListItem>
                   <Grid alignItems='center' container>
                     <Grid item xs={6}>
                       Status
                     </Grid>
                     <Grid item xs={6}>
-                      {product.quantity > 0 ? (
+                      {product.inventory.available > 0 ? (
                         <Alert icon={false} severity='success'>
                           In Stock
                         </Alert>
                       ) : (
                         <Alert icon={false} severity='error'>
-                          Unavailable
+                          Out of Stock
                         </Alert>
                       )}
                     </Grid>
                   </Grid>
                 </ListItem>
-                {product.quantity > 0 && (
+                {product.inventory.available > 0 && (
                   <>
                     <ListItem>
                       <Grid container justify='flex-end'>
@@ -116,17 +118,19 @@ export default function Product(props) {
                         </Grid>
                         <Grid item xs={6}>
                           <Select
-                            labelId='quanitity-label'
-                            id='quanitity'
+                            labelId='quantity-label'
+                            id='quantity'
                             fullWidth
                             onChange={(e) => setQuantity(e.target.value)}
                             value={quantity}
                           >
-                            {[...Array(product.quantity).keys()].map((x) => (
-                              <MenuItem key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </MenuItem>
-                            ))}
+                            {[...Array(product.inventory.available).keys()].map(
+                              (x) => (
+                                <MenuItem key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </MenuItem>
+                              )
+                            )}
                           </Select>
                         </Grid>
                       </Grid>

@@ -1,8 +1,9 @@
 import React from 'react';
-import Layout from '../components/Layout';
 import getCommerce from '../utils/commerce';
+
 import Link from 'next/link';
-import { useStyles } from '../utils/styles';
+import { Alert } from '@material-ui/lab';
+import Layout from '../components/Layout';
 import {
   Box,
   Card,
@@ -13,11 +14,10 @@ import {
   Slide,
   Typography,
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
 
 export default function Home(props) {
   const { products } = props;
-  const classes = useStyles();
+
   return (
     <Layout title='Home' commercePublicKey={props.commercePublicKey}>
       {products.length === 0 && (
@@ -25,8 +25,8 @@ export default function Home(props) {
       )}
       <Grid container spacing={1}>
         {products.map((product) => (
-          <Grid item md={3}>
-            <Slide key={product.id} direction='up' in={true}>
+          <Slide key={product.id} direction='up' in={true}>
+            <Grid item md={3}>
               <Card>
                 <Link href={`/products/${product.permalink}`}>
                   <CardActionArea>
@@ -57,8 +57,8 @@ export default function Home(props) {
                   </CardActionArea>
                 </Link>
               </Card>
-            </Slide>
-          </Grid>
+            </Grid>
+          </Slide>
         ))}
       </Grid>
     </Layout>

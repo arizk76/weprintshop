@@ -84,7 +84,15 @@ export default function Layout({
                   href='/cart'
                   className={classes.link}
                 >
-                  Cart
+                  {cart.loading ? (
+                    <CircularProgress />
+                  ) : cart.data.total_items > 0 ? (
+                    <Badge badgeContent={cart.data.total_items} color='primary'>
+                      Cart
+                    </Badge>
+                  ) : (
+                    'Cart'
+                  )}
                 </Link>
               </NextLink>
             </nav>
@@ -97,9 +105,9 @@ export default function Layout({
         {/* End hero  */}
         <Container maxWidth='md' component='footer'>
           <Box mt={5}>
-            <Typography variant='body2' color='black' align='center'>
+            <Typography variant='body2' color='textSecondary' align='center'>
               {'© '}
-              We Print Your Gift 2021
+              {siteName} 2021
               {'.'}
             </Typography>
           </Box>
