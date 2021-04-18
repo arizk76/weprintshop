@@ -7,11 +7,17 @@ import {
   Toolbar,
   Link,
   Container,
+  IconButton,
   Box,
   Badge,
   CircularProgress,
 } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
 import { theme, useStyles } from '../utils/styles';
+import Image from 'next/image';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { siteName } from '../utils/config';
@@ -66,17 +72,51 @@ export default function Layout({
         >
           <Toolbar className={classes.toolbar}>
             <NextLink href='/'>
-              <Link
-                variant='h6'
-                color='inherit'
-                noWrap
-                href='/'
-                className={classes.toolbarTitle}
-              >
-                We Print
+              <Link noWrap href='/' className={classes.toolbarTitle}>
+                <IconButton>
+                  <Image
+                    src='/welogo.png'
+                    alt='We Print Your Gift Logo'
+                    width={45}
+                    height={45}
+                    className={classes.logo}
+                  />
+                </IconButton>
               </Link>
             </NextLink>
-            <nav>
+            <nav className={classes.nav}>
+              <NextLink href='/search'>
+                <Link
+                  variant='button'
+                  color='textPrimary'
+                  href='/search'
+                  className={classes.link}
+                >
+                  <IconButton>
+                    <Badge color='secondary'>
+                      <SearchIcon className={classes.search} color='primary' />
+                    </Badge>
+                  </IconButton>
+                </Link>
+              </NextLink>
+              <NextLink href='/signin'>
+                <Link
+                  variant='button'
+                  color='textPrimary'
+                  href='/signin'
+                  className={classes.link}
+                >
+                  {' '}
+                  <IconButton>
+                    <Badge color='secondary'>
+                      <AccountCircleIcon
+                        className={classes.signIn}
+                        color='primary'
+                      />
+                    </Badge>
+                  </IconButton>
+                </Link>
+              </NextLink>
               <NextLink href='/cart'>
                 <Link
                   variant='button'
@@ -87,11 +127,26 @@ export default function Layout({
                   {cart.loading ? (
                     <CircularProgress />
                   ) : cart.data.total_items > 0 ? (
-                    <Badge badgeContent={cart.data.total_items} color='primary'>
-                      Cart
-                    </Badge>
+                    <IconButton>
+                      <Badge
+                        badgeContent={cart.data.total_items}
+                        color='secondary'
+                      >
+                        <ShoppingBasketIcon
+                          className={classes.cart}
+                          color='primary'
+                        />
+                      </Badge>
+                    </IconButton>
                   ) : (
-                    'Cart'
+                    <IconButton>
+                      <Badge>
+                        <ShoppingBasketIcon
+                          className={classes.cart}
+                          color='primary'
+                        />
+                      </Badge>
+                    </IconButton>
                   )}
                 </Link>
               </NextLink>

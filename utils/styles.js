@@ -19,10 +19,11 @@ export const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: '#f0c000',
+      main: '#9c2483',
     },
     secondary: {
-      main: '#208080',
+      main: '#74b0dc',
+      contrastText: '#ffffff',
     },
     error: {
       main: '#f04000',
@@ -35,6 +36,8 @@ export const theme = createMuiTheme({
 
 export const useStyles = makeStyles((theme) => ({
   appBar: {
+    padding: '0 14rem',
+    backgroundColor: '#ffffff',
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolbar: {
@@ -46,10 +49,26 @@ export const useStyles = makeStyles((theme) => ({
   link: {
     margin: '1rem',
   },
+  logo: {
+    padding: '.5rem',
+  },
+  nav: {
+    padding: '0.2rem',
+  },
+  search: {
+    fontSize: '1.7rem',
+  },
+  signIn: {
+    fontSize: '1.7rem',
+  },
+  cart: {
+    fontSize: '1.7rem',
+  },
   main: {
-    padding: '1rem',
+    padding: '2rem',
   },
   largeImage: {
+    paddingTop: '4rem',
     maxWidth: '50rem',
     width: '100%',
   },

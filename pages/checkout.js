@@ -366,7 +366,7 @@ function Checkout(props) {
                   <MenuItem
                     value={method.id}
                     key={index}
-                  >{`${method.description} - $${method.price.formatted_with_symbol}`}</MenuItem>
+                  >{`${method.description} - $${method.price.formatted_with_code}`}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -515,7 +515,7 @@ function Checkout(props) {
                 </Grid>
                 <Grid xs={6} item>
                   <Typography align='right'>
-                    {lineItem.line_total.formatted_with_symbol}
+                    {lineItem.line_total.formatted_with_code}
                   </Typography>
                 </Grid>
               </Grid>
@@ -528,7 +528,7 @@ function Checkout(props) {
               </Grid>
               <Grid xs={6} item>
                 <Typography align='right'>
-                  {cart.data.subtotal.formatted_with_symbol}
+                  {cart.data.subtotal.formatted_with_code}
                 </Typography>
               </Grid>
             </Grid>

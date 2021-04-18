@@ -87,7 +87,7 @@ export default function Product(props) {
                       Price
                     </Grid>
                     <Grid item xs={3}>
-                      {product.price.formatted_with_symbol}
+                      {product.price.formatted_with_code}
                     </Grid>
                   </Grid>
                 </ListItem>

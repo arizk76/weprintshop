@@ -50,7 +50,7 @@ export default function Home(props) {
                           color='textPrimary'
                           component='p'
                         >
-                          {product.price.formatted_with_symbol}
+                          {product.price.formatted_with_code}
                         </Typography>
                       </Box>
                     </CardContent>

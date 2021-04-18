@@ -101,7 +101,7 @@ function Cart(props) {
                               </Select>
                             </TableCell>
                             <TableCell align='right'>
-                              {cartItem.price.formatted_with_symbol}
+                              {cartItem.price.formatted_with_code}
                             </TableCell>
 
                             <TableCell align='right'>
@@ -126,7 +126,7 @@ function Cart(props) {
                     <ListItem>
                       <Grid container>
                         <Typography variant='h6'>
-                          Subtotal: {cart.data.subtotal.raw} EGP
+                          Subtotal: {cart.data.subtotal.formatted_with_code}
                         </Typography>
                       </Grid>
                     </ListItem>

@@ -103,7 +103,7 @@ function Confirmation(props) {
                               {cartItem.quantity}
                             </TableCell>
                             <TableCell align='right'>
-                              {cartItem.price.formatted_with_symbol}
+                              {cartItem.price.formatted_with_code}
                             </TableCell>
                           </TableRow>
                         ))}
@@ -125,7 +125,7 @@ function Confirmation(props) {
                         </Grid>
                         <Grid item xs={6}>
                           <Typography align='right'>
-                            {order.order.subtotal.formatted_with_symbol}
+                            {order.order.subtotal.formatted_with_code}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -137,7 +137,7 @@ function Confirmation(props) {
                         </Grid>
                         <Grid item xs={6}>
                           <Typography align='right'>
-                            {order.order.tax.amount.formatted_with_symbol}
+                            {order.order.tax.amount.formatted_with_code}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -149,7 +149,7 @@ function Confirmation(props) {
                         </Grid>
                         <Grid item xs={6}>
                           <Typography align='right'>
-                            {order.order.shipping.price.formatted_with_symbol}
+                            {order.order.shipping.price.formatted_with_code}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -161,7 +161,7 @@ function Confirmation(props) {
                         </Grid>
                         <Grid item xs={6}>
                           <Typography align='right'>
-                            {order.order.total_with_tax.formatted_with_symbol}
+                            {order.order.total_with_tax.formatted_with_code}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -173,7 +173,7 @@ function Confirmation(props) {
                         </Grid>
                         <Grid item xs={6}>
                           <Typography variant='h3' align='right'>
-                            {order.order.total_paid.formatted_with_symbol}
+                            {order.order.total_paid.formatted_with_code}
                           </Typography>
                         </Grid>
                       </Grid>
